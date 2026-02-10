@@ -5,8 +5,18 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #f6f6f4;
+  background: radial-gradient(circle at top, #fff1c4, #f6d05f 45%, #f2b94e 100%);
   color: #1b1b1b;
+}
+
+:root {
+  --sf-blue: #1e3d8f;
+  --sf-red: #d9331e;
+  --sf-gold: #f6d05f;
+  --sf-cream: #fff7dd;
+  --sf-ink: #1b1b1b;
+  --sf-muted: #4b4b4b;
+  --sf-card: #ffffff;
 }
 
 .page {
@@ -25,7 +35,7 @@ body {
 
 .subtitle {
   margin: 0;
-  color: #4b4b4b;
+  color: var(--sf-muted);
 }
 
 .hero {
@@ -35,8 +45,9 @@ body {
   align-items: center;
   padding: 24px;
   border-radius: 16px;
-  background: linear-gradient(135deg, #f8f1d8, #f5e6b8);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(135deg, #17347a, #2552b7);
+  box-shadow: 0 12px 30px rgba(30, 61, 143, 0.35);
+  color: #ffffff;
 }
 
 .hero-copy {
@@ -52,7 +63,7 @@ body {
 .hero-text {
   margin: 0;
   font-size: 1.05rem;
-  color: #3a2b1a;
+  color: #f7e8c1;
 }
 
 .hero-images {
@@ -66,8 +77,8 @@ body {
   border-radius: 12px;
   overflow: hidden;
   background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  border: 2px solid rgba(246, 208, 95, 0.6);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 .hero-image img {
@@ -77,10 +88,11 @@ body {
 }
 
 .controls {
-  background: #ffffff;
+  background: var(--sf-card);
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 22px rgba(30, 61, 143, 0.12);
+  border: 1px solid rgba(30, 61, 143, 0.08);
   display: grid;
   gap: 12px;
 }
@@ -98,7 +110,7 @@ body {
   align-items: center;
   gap: 10px;
   font-size: 0.9rem;
-  color: #4b4b4b;
+  color: var(--sf-muted);
 }
 
 .toggle {
@@ -118,7 +130,7 @@ body {
 .toggle-track {
   width: 44px;
   height: 24px;
-  background: #d8d8d8;
+  background: #c4cfea;
   border-radius: 999px;
   position: relative;
   transition: background 0.2s ease;
@@ -138,7 +150,7 @@ body {
 }
 
 .toggle input:checked + .toggle-track {
-  background: #2b6cb0;
+  background: var(--sf-blue);
 }
 
 .toggle input:checked + .toggle-track::after {
@@ -146,7 +158,7 @@ body {
 }
 
 .toggle input:focus-visible + .toggle-track {
-  outline: 2px solid #2b6cb0;
+  outline: 2px solid var(--sf-blue);
   outline-offset: 2px;
 }
 
@@ -164,9 +176,10 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #f7f7f7;
+  background: #fffaf0;
   padding: 8px 10px;
   border-radius: 8px;
+  border: 1px solid rgba(217, 51, 30, 0.15);
 }
 
 .selected-topics {
@@ -184,17 +197,19 @@ body {
 .control-actions button {
   padding: 10px 14px;
   border-radius: 8px;
-  border: 1px solid #d0d0d0;
-  background: #ffffff;
+  border: 1px solid rgba(30, 61, 143, 0.3);
+  background: var(--sf-cream);
+  color: var(--sf-blue);
   cursor: pointer;
+  font-weight: 600;
 }
 
 .control-actions button:hover {
-  background: #f2f2f2;
+  background: #ffeab0;
 }
 
 .topic-pill {
-  background: #191919;
+  background: var(--sf-red);
   color: #ffffff;
   border-radius: 999px;
   padding: 6px 10px;
@@ -220,7 +235,7 @@ body {
 }
 
 .results-count {
-  color: #4b4b4b;
+  color: var(--sf-muted);
 }
 
 .results-list {
@@ -228,11 +243,26 @@ body {
   gap: 16px;
 }
 
+.random-quote {
+  display: none;
+  padding: 16px;
+  border-radius: 12px;
+  background: #fff2c2;
+  border: 1px solid rgba(217, 51, 30, 0.4);
+  font-style: italic;
+  color: #6b2c1a;
+}
+
+.random-quote.visible {
+  display: block;
+}
+
 .episode-card {
   background: #ffffff;
   border-radius: 12px;
   padding: 16px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 16px rgba(30, 61, 143, 0.12);
+  border: 1px solid rgba(30, 61, 143, 0.08);
 }
 
 .episode-card h3 {
@@ -241,7 +271,7 @@ body {
 
 .episode-meta {
   margin: 0 0 8px;
-  color: #4b4b4b;
+  color: var(--sf-muted);
   font-size: 0.9rem;
 }
 

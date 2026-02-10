@@ -2,6 +2,7 @@ const topicCheckboxes = document.getElementById("topic-checkboxes");
 const selectedTopicsEl = document.getElementById("selected-topics");
 const resultsList = document.getElementById("results-list");
 const resultsCount = document.getElementById("results-count");
+const randomQuote = document.getElementById("random-quote");
 const resetTopicsButton = document.getElementById("reset-topics");
 const randomEpisodeButton = document.getElementById("random-episode");
 const showAllEpisodesButton = document.getElementById("show-all-episodes");
@@ -195,29 +196,37 @@ const pickRandomEpisode = () => {
   resultsList.innerHTML = "";
   resultsCount.textContent = `1 of ${eligible.length} eligible episodes`;
 
-  const card = document.createElement("article");
-  card.className = "episode-card";
-  const title = document.createElement("h3");
-  title.textContent = choice.title;
-  const subtitle = document.createElement("p");
-  subtitle.className = "episode-subtitle";
-  subtitle.textContent = choice.subtitle || "";
-  const meta = document.createElement("p");
-  meta.className = "episode-meta";
-  if (choice.season) {
-    meta.textContent = `Season ${choice.season} · Episode ${choice.episode}`;
-  } else if (choice.episode) {
-    meta.textContent = `Episode ${choice.episode}`;
-  } else {
-    meta.textContent = "Episode details unavailable";
-  }
-  if (choice.subtitle) {
-    card.append(title, subtitle, meta);
-  } else {
-    card.append(title, meta);
-  }
-  resultsList.appendChild(card);
-  card.scrollIntoView({ behavior: "smooth", block: "start" });
+  randomQuote.textContent =
+    "Did you notice sometimes you don't have enough faith in yourself to choose the right episode so you let a computer do it for you?";
+  randomQuote.classList.add("visible");
+  randomQuote.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  window.setTimeout(() => {
+    randomQuote.classList.remove("visible");
+    const card = document.createElement("article");
+    card.className = "episode-card";
+    const title = document.createElement("h3");
+    title.textContent = choice.title;
+    const subtitle = document.createElement("p");
+    subtitle.className = "episode-subtitle";
+    subtitle.textContent = choice.subtitle || "";
+    const meta = document.createElement("p");
+    meta.className = "episode-meta";
+    if (choice.season) {
+      meta.textContent = `Season ${choice.season} · Episode ${choice.episode}`;
+    } else if (choice.episode) {
+      meta.textContent = `Episode ${choice.episode}`;
+    } else {
+      meta.textContent = "Episode details unavailable";
+    }
+    if (choice.subtitle) {
+      card.append(title, subtitle, meta);
+    } else {
+      card.append(title, meta);
+    }
+    resultsList.appendChild(card);
+    card.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, 5000);
 };
 
 const toggleMode = () => {
