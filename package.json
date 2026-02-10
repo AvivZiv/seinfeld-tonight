@@ -1,0 +1,11 @@
+{
+  "name": "seinfeld-tonight",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:data": "node scripts/build-episodes.mjs"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12"
+  }
+}

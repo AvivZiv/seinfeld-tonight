@@ -1,0 +1,198 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f6f6f4;
+  color: #1b1b1b;
+}
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.header h1 {
+  margin: 0 0 8px;
+  font-size: 2.2rem;
+}
+
+.subtitle {
+  margin: 0;
+  color: #4b4b4b;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  align-items: center;
+  padding: 24px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f8f1d8, #f5e6b8);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.hero-copy {
+  display: grid;
+  gap: 12px;
+}
+
+.hero-logo {
+  max-width: 320px;
+  width: 100%;
+}
+
+.hero-text {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #3a2b1a;
+}
+
+.hero-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+.hero-image {
+  margin: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.controls {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  display: grid;
+  gap: 12px;
+}
+
+.label {
+  font-weight: 600;
+}
+
+.topic-checkboxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.topic-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f7f7f7;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+.selected-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.control-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.control-actions button {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #d0d0d0;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.control-actions button:hover {
+  background: #f2f2f2;
+}
+
+.topic-pill {
+  background: #191919;
+  color: #ffffff;
+  border-radius: 999px;
+  padding: 6px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+.topic-pill button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+}
+
+.results-count {
+  color: #4b4b4b;
+}
+
+.results-list {
+  display: grid;
+  gap: 16px;
+}
+
+.episode-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.episode-card h3 {
+  margin: 0 0 6px;
+}
+
+.episode-meta {
+  margin: 0 0 8px;
+  color: #4b4b4b;
+  font-size: 0.9rem;
+}
+
+.episode-subtitle {
+  margin: 4px 0 6px;
+  font-weight: 600;
+  color: #2a2a2a;
+}
+
+.episode-summary {
+  margin: 0;
+}
+
+.empty-state {
+  padding: 20px;
+  background: #fff5f5;
+  border: 1px solid #f0c2c2;
+  border-radius: 12px;
+}

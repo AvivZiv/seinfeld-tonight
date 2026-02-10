@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Seinfeld Trigger-Free Episode Picker</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="header">
+        <h1>Seinfeld Episode Picker</h1>
+        <p class="subtitle">
+          Choose topics to avoid and get episodes without those triggers.
+        </p>
+      </header>
+
+      <section class="hero" aria-label="Seinfeld visuals">
+        <div class="hero-copy">
+          <img
+            class="hero-logo"
+            src="Seinfeld_logo.webp"
+            alt="Seinfeld logo"
+          />
+          <p class="hero-text">
+            A cozy, trigger-aware way to pick tonight’s Seinfeld episode.
+          </p>
+        </div>
+        <div class="hero-images">
+          <figure class="hero-image">
+            <img
+              src="seinfeld_cast.webp"
+              alt="Seinfeld cast"
+            />
+          </figure>
+          <figure class="hero-image">
+            <img
+              src="rewatching-seinfeld.webp"
+              alt="Watching Seinfeld"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <section class="controls">
+        <label class="label">Avoid these topics</label>
+        <div id="topic-checkboxes" class="topic-checkboxes"></div>
+        <div id="selected-topics" class="selected-topics" aria-live="polite"></div>
+        <div class="control-actions">
+          <button id="reset-topics" type="button">Reset topics</button>
+          <button id="random-episode" type="button">Pick random episode</button>
+          <button id="show-all-episodes" type="button">Show all matches</button>
+        </div>
+      </section>
+
+      <section class="results">
+        <div class="results-header">
+          <h2>Episodes</h2>
+          <span id="results-count" class="results-count"></span>
+        </div>
+        <div id="results-list" class="results-list"></div>
+      </section>
+    </main>
+
+    <script src="data/topics.js"></script>
+    <script src="data/episodes.js"></script>
+    <script id="fallback-topics" type="application/json">
+      [
+        "Breakup",
+        "Death",
+        "Divorce",
+        "Drugs",
+        "Food",
+        "Friendship",
+        "Gambling",
+        "Illness",
+        "Infidelity",
+        "Law",
+        "Money",
+        "Parenting",
+        "Pets",
+        "Politics",
+        "Religion",
+        "Sexual content",
+        "Smoking",
+        "Social anxiety",
+        "Sports",
+        "Travel",
+        "Violence",
+        "Work",
+        "Women",
+        "Tourette's or tics",
+        "Addiction",
+        "Mental health",
+        "Body image"
+      ]
+    </script>
+    <script id="fallback-episodes" type="application/json">
+      [
+        {
+          "season": 2,
+          "episode": 11,
+          "title": "The Contest",
+          "summary": "Jerry, George, Elaine, and Kramer make a pact to see who can remain abstinent the longest.",
+          "topics": ["Sexual content", "Friendship"]
+        },
+        {
+          "season": 4,
+          "episode": 11,
+          "title": "The Contest (Clip Show)",
+          "summary": "A recap of highlights from previous episodes framed around the contest pact.",
+          "topics": ["Sexual content", "Friendship"]
+        },
+        {
+          "season": 5,
+          "episode": 14,
+          "title": "The Marine Biologist",
+          "summary": "George pretends to be a marine biologist and faces a surprising challenge on the beach.",
+          "topics": ["Work", "Friendship"]
+        },
+        {
+          "season": 6,
+          "episode": 5,
+          "title": "The Couch",
+          "summary": "George deals with a new couch while the gang gets pulled into a film shoot.",
+          "topics": ["Money", "Friendship"]
+        }
+      ]
+    </script>
+    <script src="app.js" defer></script>
+  </body>
+</html>
