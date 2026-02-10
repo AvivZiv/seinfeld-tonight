@@ -130,13 +130,10 @@ const renderEpisodes = () => {
     } else {
       meta.textContent = "Episode details unavailable";
     }
-    const summary = document.createElement("p");
-    summary.className = "episode-summary";
-    summary.textContent = episode.summary;
     if (episode.subtitle) {
-      card.append(title, subtitle, meta, summary);
+      card.append(title, subtitle, meta);
     } else {
-      card.append(title, meta, summary);
+      card.append(title, meta);
     }
     resultsList.appendChild(card);
   });
@@ -214,13 +211,10 @@ const pickRandomEpisode = () => {
   } else {
     meta.textContent = "Episode details unavailable";
   }
-  const summary = document.createElement("p");
-  summary.className = "episode-summary";
-  summary.textContent = choice.summary;
   if (choice.subtitle) {
-    card.append(title, subtitle, meta, summary);
+    card.append(title, subtitle, meta);
   } else {
-    card.append(title, meta, summary);
+    card.append(title, meta);
   }
   resultsList.appendChild(card);
   card.scrollIntoView({ behavior: "smooth", block: "start" });

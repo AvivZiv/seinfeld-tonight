@@ -300,9 +300,9 @@ const main = async () => {
     throw new Error("Failed to read Wikipedia HTML.");
   }
   const debug = process.env.SCRAPE_DEBUG === "1";
-  let episodes = parseEpisodesFromList(html, debug);
+  let episodes = await parseEpisodesFromSections(debug);
   if (episodes.length === 0) {
-    episodes = await parseEpisodesFromSections(debug);
+    episodes = parseEpisodesFromList(html, debug);
   }
   episodes = dedupeEpisodes(episodes);
   if (episodes.length === 0) {
