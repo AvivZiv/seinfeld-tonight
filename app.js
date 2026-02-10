@@ -5,10 +5,14 @@ const resultsCount = document.getElementById("results-count");
 const resetTopicsButton = document.getElementById("reset-topics");
 const randomEpisodeButton = document.getElementById("random-episode");
 const showAllEpisodesButton = document.getElementById("show-all-episodes");
+const modeToggleInput = document.getElementById("mode-toggle");
+const modeLabel = document.getElementById("mode-label");
+const topicsLabel = document.getElementById("topics-label");
 
 let allTopics = [];
 let episodes = [];
 let selectedTopics = [];
+let mode = "exclude";
 
 const readFallbackJson = (id) => {
   const node = document.getElementById(id);
@@ -89,10 +93,14 @@ const renderSelectedTopics = () => {
 
 const renderEpisodes = () => {
   const filtered = episodes.filter((episode) => {
-    if (!episode.topics || episode.topics.length === 0) {
+    const episodeTopics = episode.topics || [];
+    if (selectedTopics.length === 0) {
       return true;
     }
-    return selectedTopics.every((topic) => !episode.topics.includes(topic));
+    if (mode === "include") {
+      return selectedTopics.every((topic) => episodeTopics.includes(topic));
+    }
+    return selectedTopics.every((topic) => !episodeTopics.includes(topic));
   });
   resultsList.innerHTML = "";
   resultsCount.textContent = `${filtered.length} of ${episodes.length} episodes`;
@@ -138,6 +146,15 @@ const render = () => {
   renderSelectedTopics();
   renderTopicCheckboxes();
   renderEpisodes();
+  if (mode === "include") {
+    modeLabel.textContent = "Inclusion";
+    topicsLabel.textContent = "Include only these topics";
+    modeToggleInput.checked = true;
+  } else {
+    modeLabel.textContent = "Exclusion";
+    topicsLabel.textContent = "Avoid these topics";
+    modeToggleInput.checked = false;
+  }
 };
 
 const addTopic = (topic) => {
@@ -167,10 +184,14 @@ const resetTopics = () => {
 
 const pickRandomEpisode = () => {
   const eligible = episodes.filter((episode) => {
-    if (!episode.topics || episode.topics.length === 0) {
+    const episodeTopics = episode.topics || [];
+    if (selectedTopics.length === 0) {
       return true;
     }
-    return selectedTopics.every((topic) => !episode.topics.includes(topic));
+    if (mode === "include") {
+      return selectedTopics.every((topic) => episodeTopics.includes(topic));
+    }
+    return selectedTopics.every((topic) => !episodeTopics.includes(topic));
   });
   if (eligible.length === 0) return;
   const choice = eligible[Math.floor(Math.random() * eligible.length)];
@@ -205,8 +226,14 @@ const pickRandomEpisode = () => {
   card.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
+const toggleMode = () => {
+  mode = modeToggleInput.checked ? "include" : "exclude";
+  render();
+};
+
 resetTopicsButton.addEventListener("click", resetTopics);
 randomEpisodeButton.addEventListener("click", pickRandomEpisode);
 showAllEpisodesButton.addEventListener("click", renderEpisodes);
+modeToggleInput.addEventListener("change", toggleMode);
 
 loadData();

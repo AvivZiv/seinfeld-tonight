@@ -43,7 +43,17 @@
       </section>
 
       <section class="controls">
-        <label class="label">Avoid these topics</label>
+        <div class="control-header">
+          <label class="label" id="topics-label">Avoid these topics</label>
+          <div class="mode-toggle">
+            <span id="mode-label">Exclusion</span>
+            <label class="toggle">
+              <input id="mode-toggle" type="checkbox" />
+              <span class="toggle-track" aria-hidden="true"></span>
+              <span class="toggle-text">Include</span>
+            </label>
+          </div>
+        </div>
         <div id="topic-checkboxes" class="topic-checkboxes"></div>
         <div id="selected-topics" class="selected-topics" aria-live="polite"></div>
         <div class="control-actions">
