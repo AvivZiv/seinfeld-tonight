@@ -28,6 +28,37 @@ body {
   gap: 32px;
 }
 
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tab-button {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(30, 61, 143, 0.3);
+  background: #fff7dd;
+  color: #1e3d8f;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tab-button.active {
+  background: #1e3d8f;
+  color: #ffffff;
+  border-color: transparent;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: grid;
+  gap: 24px;
+}
+
 .header h1 {
   margin: 0 0 8px;
   font-size: 2.2rem;
@@ -206,6 +237,80 @@ body {
 
 .control-actions button:hover {
   background: #ffeab0;
+}
+
+.quote-search {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(30, 61, 143, 0.25);
+  font-size: 1rem;
+}
+
+.quotes-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+
+@media (min-width: 720px) {
+  .quotes-layout {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
+}
+
+.quotes-list {
+  display: grid;
+  gap: 12px;
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.quote-item {
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid rgba(30, 61, 143, 0.12);
+  padding: 12px;
+  cursor: pointer;
+}
+
+.quote-item:hover,
+.quote-item.active {
+  border-color: rgba(30, 61, 143, 0.5);
+  box-shadow: 0 6px 14px rgba(30, 61, 143, 0.12);
+}
+
+.quote-text {
+  margin: 0 0 6px;
+  font-weight: 600;
+}
+
+.quote-meta {
+  margin: 0;
+  color: #4b4b4b;
+  font-size: 0.85rem;
+}
+
+.quote-detail {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid rgba(30, 61, 143, 0.12);
+  padding: 16px;
+  box-shadow: 0 8px 18px rgba(30, 61, 143, 0.12);
+}
+
+.quote-detail-empty {
+  margin: 0;
+  color: #4b4b4b;
+}
+
+.quote-detail h3 {
+  margin: 0 0 8px;
+}
+
+.quote-detail p {
+  margin: 6px 0;
 }
 
 .topic-pill {

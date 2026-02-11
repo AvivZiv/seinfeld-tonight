@@ -42,39 +42,79 @@
         </div>
       </section>
 
-      <section class="controls">
-        <div class="control-header">
-          <label class="label" id="topics-label">Avoid these topics</label>
-          <div class="mode-toggle">
-            <span id="mode-label">Exclusion</span>
-            <label class="toggle">
-              <input id="mode-toggle" type="checkbox" />
-              <span class="toggle-track" aria-hidden="true"></span>
-              <span class="toggle-text">Include</span>
-            </label>
+      <nav class="tabs" aria-label="Site sections">
+        <button class="tab-button active" data-tab="episodes">
+          Episode Picker
+        </button>
+        <button class="tab-button" data-tab="quotes">
+          Where do I remember that from?
+        </button>
+      </nav>
+
+      <section id="tab-episodes" class="tab-panel active">
+        <section class="controls">
+          <div class="control-header">
+            <label class="label" id="topics-label">Avoid these topics</label>
+            <div class="mode-toggle">
+              <span id="mode-label">Exclusion</span>
+              <label class="toggle">
+                <input id="mode-toggle" type="checkbox" />
+                <span class="toggle-track" aria-hidden="true"></span>
+                <span class="toggle-text">Include</span>
+              </label>
+            </div>
           </div>
-        </div>
-        <div id="topic-checkboxes" class="topic-checkboxes"></div>
-        <div id="selected-topics" class="selected-topics" aria-live="polite"></div>
-        <div class="control-actions">
-          <button id="reset-topics" type="button">Reset topics</button>
-          <button id="random-episode" type="button">Pick random episode</button>
-          <button id="show-all-episodes" type="button">Show all matches</button>
-        </div>
+          <div id="topic-checkboxes" class="topic-checkboxes"></div>
+          <div id="selected-topics" class="selected-topics" aria-live="polite"></div>
+          <div class="control-actions">
+            <button id="reset-topics" type="button">Reset topics</button>
+            <button id="random-episode" type="button">Pick random episode</button>
+            <button id="show-all-episodes" type="button">Show all matches</button>
+          </div>
+        </section>
+
+        <section class="results">
+          <div class="results-header">
+            <h2>Episodes</h2>
+            <span id="results-count" class="results-count"></span>
+          </div>
+          <div id="random-quote" class="random-quote" aria-live="polite"></div>
+          <div id="results-list" class="results-list"></div>
+        </section>
       </section>
 
-      <section class="results">
-        <div class="results-header">
-          <h2>Episodes</h2>
-          <span id="results-count" class="results-count"></span>
-        </div>
-        <div id="random-quote" class="random-quote" aria-live="polite"></div>
-        <div id="results-list" class="results-list"></div>
+      <section id="tab-quotes" class="tab-panel">
+        <section class="controls">
+          <div class="control-header">
+            <label class="label" for="quote-search">
+              Search quotes
+            </label>
+          </div>
+          <input
+            id="quote-search"
+            class="quote-search"
+            type="search"
+            placeholder="Search by quote text or speaker..."
+            autocomplete="off"
+          />
+          <div class="quotes-layout">
+            <div id="quotes-list" class="quotes-list" role="listbox"></div>
+            <div id="quote-detail" class="quote-detail">
+              <p class="quote-detail-empty">
+                Select a quote to see its details.
+              </p>
+            </div>
+          </div>
+        </section>
       </section>
     </main>
 
     <script src="data/topics.js"></script>
     <script src="data/episodes.js"></script>
+    <script src="data/quotes.js"></script>
+    <script src="data/topics.js"></script>
+    <script src="data/episodes.js"></script>
+    <script src="data/quotes.js"></script>
     <script id="fallback-topics" type="application/json">
       [
         "Breakup",

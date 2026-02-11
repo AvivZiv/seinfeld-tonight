@@ -3,7 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build:data": "node scripts/build-episodes.mjs"
+    "build:data": "node scripts/build-episodes.mjs",
+    "build:quotes": "node scripts/build-quotes.mjs",
+    "validate:quotes": "node scripts/validate-quotes.mjs"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.12"

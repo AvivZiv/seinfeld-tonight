@@ -9,11 +9,18 @@ const showAllEpisodesButton = document.getElementById("show-all-episodes");
 const modeToggleInput = document.getElementById("mode-toggle");
 const modeLabel = document.getElementById("mode-label");
 const topicsLabel = document.getElementById("topics-label");
+const tabButtons = document.querySelectorAll(".tab-button");
+const tabPanels = document.querySelectorAll(".tab-panel");
+const quoteSearch = document.getElementById("quote-search");
+const quotesList = document.getElementById("quotes-list");
+const quoteDetail = document.getElementById("quote-detail");
 
 let allTopics = [];
 let episodes = [];
 let selectedTopics = [];
 let mode = "exclude";
+let quotes = [];
+let selectedQuoteId = null;
 
 const readFallbackJson = (id) => {
   const node = document.getElementById(id);
@@ -33,26 +40,31 @@ const readGlobalJson = (key) => {
 
 const loadData = async () => {
   try {
-    const [topicsResponse, episodesResponse] = await Promise.all([
+    const [topicsResponse, episodesResponse, quotesResponse] = await Promise.all([
       fetch("data/topics.json"),
       fetch("data/episodes.json"),
+      fetch("data/quotes.json"),
     ]);
-    if (!topicsResponse.ok || !episodesResponse.ok) {
+    if (!topicsResponse.ok || !episodesResponse.ok || !quotesResponse.ok) {
       throw new Error("Failed to fetch data files.");
     }
     allTopics = await topicsResponse.json();
     episodes = await episodesResponse.json();
+    quotes = await quotesResponse.json();
   } catch (error) {
     const globalTopics = readGlobalJson("__TOPICS__");
     const globalEpisodes = readGlobalJson("__EPISODES__");
+    const globalQuotes = readGlobalJson("__QUOTES__");
     const fallbackTopics = readFallbackJson("fallback-topics");
     const fallbackEpisodes = readFallbackJson("fallback-episodes");
     allTopics =
       globalTopics || (Array.isArray(fallbackTopics) ? fallbackTopics : []);
     episodes =
       globalEpisodes || (Array.isArray(fallbackEpisodes) ? fallbackEpisodes : []);
+    quotes = globalQuotes || [];
   }
   render();
+  renderQuotes();
 };
 
 const renderTopicCheckboxes = () => {
@@ -155,6 +167,98 @@ const render = () => {
   }
 };
 
+const setActiveTab = (tabName) => {
+  tabButtons.forEach((button) => {
+    button.classList.toggle("active", button.dataset.tab === tabName);
+  });
+  tabPanels.forEach((panel) => {
+    panel.classList.toggle("active", panel.id === `tab-${tabName}`);
+  });
+};
+
+const renderQuoteDetail = () => {
+  const quote = quotes.find((item) => item.id === selectedQuoteId);
+  if (!quote) {
+    quoteDetail.innerHTML =
+      '<p class="quote-detail-empty">Select a quote to see its details.</p>';
+    return;
+  }
+
+  const speakerLine = quote.speaker
+    ? `${quote.speaker}${quote.listener ? ` → ${quote.listener}` : ""}`
+    : "Unknown speaker";
+  const episodeLine = quote.episodeTitle
+    ? `${quote.episodeTitle} · Season ${quote.season ?? "?"} · Episode ${
+        quote.episode ?? "?"
+      }`
+    : "Episode details unavailable";
+
+  quoteDetail.innerHTML = `
+    <h3>Quote details</h3>
+    <p class="quote-text">“${quote.text}”</p>
+    <p><strong>Speaker:</strong> ${speakerLine}</p>
+    <p><strong>Episode:</strong> ${episodeLine}</p>
+    ${quote.situation ? `<p><strong>Situation:</strong> ${quote.situation}</p>` : ""}
+    ${quote.source ? `<p><strong>Source:</strong> ${quote.source}</p>` : ""}
+  `;
+};
+
+const renderQuotes = () => {
+  if (quotes.length === 0) {
+    quotesList.innerHTML = "";
+    const empty = document.createElement("p");
+    empty.className = "quote-detail-empty";
+    empty.textContent =
+      "No quotes loaded. Run npm run build:quotes to fetch them.";
+    quotesList.appendChild(empty);
+    renderQuoteDetail();
+    return;
+  }
+  const query = quoteSearch.value.trim().toLowerCase();
+  const filtered = quotes.filter((quote) => {
+    const haystack = [
+      quote.text,
+      quote.speaker,
+      quote.listener,
+      quote.episodeTitle,
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+    return haystack.includes(query);
+  });
+
+  quotesList.innerHTML = "";
+  if (filtered.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "quote-detail-empty";
+    empty.textContent = "No quotes match your search.";
+    quotesList.appendChild(empty);
+    return;
+  }
+
+  filtered.forEach((quote) => {
+    const item = document.createElement("button");
+    item.type = "button";
+    item.className = "quote-item";
+    if (quote.id === selectedQuoteId) {
+      item.classList.add("active");
+    }
+    item.innerHTML = `
+      <p class="quote-text">“${quote.text}”</p>
+      <p class="quote-meta">${quote.speaker || "Unknown speaker"} · ${
+        quote.episodeTitle || "Unknown episode"
+      }</p>
+    `;
+    item.addEventListener("click", () => {
+      selectedQuoteId = quote.id;
+      renderQuotes();
+      renderQuoteDetail();
+    });
+    quotesList.appendChild(item);
+  });
+};
+
 const addTopic = (topic) => {
   if (!selectedTopics.includes(topic)) {
     selectedTopics = [...selectedTopics, topic];
@@ -238,5 +342,9 @@ resetTopicsButton.addEventListener("click", resetTopics);
 randomEpisodeButton.addEventListener("click", pickRandomEpisode);
 showAllEpisodesButton.addEventListener("click", renderEpisodes);
 modeToggleInput.addEventListener("change", toggleMode);
+tabButtons.forEach((button) => {
+  button.addEventListener("click", () => setActiveTab(button.dataset.tab));
+});
+quoteSearch.addEventListener("input", renderQuotes);
 
 loadData();
