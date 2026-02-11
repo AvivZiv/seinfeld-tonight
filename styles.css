@@ -247,6 +247,27 @@ body {
   font-size: 1rem;
 }
 
+.scene-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(30, 61, 143, 0.25);
+  font-size: 1rem;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.match-badge {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(30, 61, 143, 0.1);
+  color: #17347a;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
 .quotes-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);

@@ -49,6 +49,9 @@
         <button class="tab-button" data-tab="quotes">
           Where do I remember that from?
         </button>
+        <button class="tab-button" data-tab="scene-search">
+          What episode is this scene?
+        </button>
       </nav>
 
       <section id="tab-episodes" class="tab-panel active">
@@ -97,6 +100,7 @@
             placeholder="Search by quote text or speaker..."
             autocomplete="off"
           />
+          <p id="quotes-count" class="quote-detail-empty"></p>
           <div class="quotes-layout">
             <div id="quotes-list" class="quotes-list" role="listbox"></div>
             <div id="quote-detail" class="quote-detail">
@@ -105,6 +109,28 @@
               </p>
             </div>
           </div>
+        </section>
+      </section>
+
+      <section id="tab-scene-search" class="tab-panel">
+        <section class="controls">
+          <div class="control-header">
+            <label class="label" for="scene-input">
+              Describe the scene
+            </label>
+          </div>
+          <textarea
+            id="scene-input"
+            class="scene-input"
+            rows="5"
+            placeholder="Example: George pretends to be a marine biologist, someone is in trouble at the beach, and there is a whale..."
+          ></textarea>
+          <div class="control-actions">
+            <button id="scene-search-button" type="button">Find episode</button>
+            <button id="scene-clear-button" type="button">Clear</button>
+          </div>
+          <p id="scene-results-count" class="quote-detail-empty"></p>
+          <div id="scene-results" class="results-list"></div>
         </section>
       </section>
     </main>
